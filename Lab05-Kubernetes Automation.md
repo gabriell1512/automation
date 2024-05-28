@@ -67,7 +67,12 @@ Then you run it, with a port mapping to `chosen_port:80`. If you use VSCode, you
 **QUESTION**
 What did the `multi-line script` return ?
 ```text
-// Answer here
+Run echo Add other actions to build,
+  echo Add other actions to build,
+  echo test, and deploy your project.
+  shell: /usr/bin/bash -e {0}
+Add other actions to build,
+test, and deploy your project.
 ```
 :::
 
@@ -82,7 +87,37 @@ The file was added under `.github/workflows/blank.yml`
 **QUESTION**
 What did you change ? Show the changes from your workflow file and explain it a little.
 ```yaml
-// Answer here
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags: hello-world-nginx:v1
+
+      - name: Run Docker image
+        uses: docker/run-action@v1
+        with:
+          image: hello-world-nginx:v1
+          options: -p 80:80
+
+    i added a build and run for the docker image
 ```
 :::
 
