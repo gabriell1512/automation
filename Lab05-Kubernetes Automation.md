@@ -300,7 +300,8 @@ spec:
 **QUESTION**
 How did you make the name randomised?
 ```text
-// Answer here
+metadata:
+  name: mypod-${{ github.run_id }}
 ```
 :::
 
@@ -318,7 +319,8 @@ Try to install a Helm chart into your Kubernetes cluster, with the right GitHub 
 **QUESTION**
 How does the command for a Helm install look like with the flags added ?
 ```text
-// Answer here
+helm upgrade --install my-chart ./my-chart --namespace my-namespace --set image.tag=2.0.0
+
 ```
 :::
 
